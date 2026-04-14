@@ -82,11 +82,26 @@ public class Application {
     }
 
     private void handleInsertMoney() {
-        // TODO: implement in next task
+        System.out.print("Enter amount in cents (e.g. 25 for $0.25): ");
+        String input = scanner.nextLine().trim();
+        int amount;
+        try {
+            amount = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a whole number of cents.");
+            return;
+        }
+        if (amount <= 0) {
+            System.out.println("Amount must be positive.");
+            return;
+        }
+        machine.insertMoney(amount);
+        System.out.printf("Inserted $%.2f. Current balance: $%.2f%n",
+                amount / 100.0, machine.getBalance() / 100.0);
     }
 
     private void handleCheckBalance() {
-        // TODO: implement in next task
+        System.out.printf("Current balance: $%.2f%n", machine.getBalance() / 100.0);
     }
 
     private void handlePurchase() {
