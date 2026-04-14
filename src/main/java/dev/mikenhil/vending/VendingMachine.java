@@ -1,10 +1,24 @@
 package dev.mikenhil.vending;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VendingMachine {
+    private static final int DEFAULT_QUANTITY = 5;
+
     private int balance;
+    private final List<Slot> slots;
 
     public VendingMachine() {
         this.balance = 0;
+        this.slots = new ArrayList<>();
+        for (Product product : Product.values()) {
+            slots.add(new Slot(product, DEFAULT_QUANTITY));
+        }
+    }
+
+    public List<Slot> getSlots() {
+        return new ArrayList<>(slots);
     }
 
     public void insertMoney(int amount) {

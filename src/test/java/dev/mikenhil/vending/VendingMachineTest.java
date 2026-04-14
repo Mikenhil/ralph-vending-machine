@@ -3,6 +3,8 @@ package dev.mikenhil.vending;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendingMachineTest {
@@ -58,5 +60,38 @@ class VendingMachineTest {
     @Test
     void collectChangeWhenBalanceIsZeroReturnsZero() {
         assertEquals(0, machine.collectChange());
+    }
+
+    @Test
+    void getSlotsReturnsOneSlotPerProduct() {
+        List<Slot> slots = machine.getSlots();
+        assertEquals(Product.values().length, slots.size());
+    }
+
+    @Test
+    void getSlotsContainsAllProducts() {
+        List<Slot> slots = machine.getSlots();
+        for (Product product : Product.values()) {
+            assertTrue(slots.stream().anyMatch(s -> s.getProduct() == product));
+        }
+    }
+
+    @Test
+    void getSlotsAreInStock() {
+        machine.getSlots().forEach(slot -> assertTrue(slot.isInStock()));
+    }
+
+    @Test
+    void getSlotsReturnsDefensiveCopy() {
+        List<Slot> first = machine.getSlots();
+        List<Slot> second = machine.getSlots();
+        assertNotSame(first, second);
+    }
+
+    @Test
+    void mutatingSlotsListDoesNotAffectMachine() {
+        List<Slot> slots = machine.getSlots();
+        slots.clear();
+        assertEquals(Product.values().length, machine.getSlots().size());
     }
 }
