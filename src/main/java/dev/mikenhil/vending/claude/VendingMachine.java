@@ -1,4 +1,4 @@
-package dev.mikenhil.vending;
+package dev.mikenhil.vending.claude;
 
 import java.util.ArrayList;
 import java.util.List;

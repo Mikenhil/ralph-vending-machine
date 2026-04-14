@@ -1,4 +1,4 @@
-package dev.mikenhil.vending;
+package dev.mikenhil.vending.claude;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package dev.mikenhil.vending;
+package dev.mikenhil.vending.claude;
 
 public enum Product {
     COLA("Cola", 150),

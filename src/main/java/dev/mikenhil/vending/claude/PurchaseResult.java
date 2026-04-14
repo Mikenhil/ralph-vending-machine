@@ -1,4 +1,4 @@
-package dev.mikenhil.vending;
+package dev.mikenhil.vending.claude;
 
 public sealed interface PurchaseResult {
     record Success(Product product, int change) implements PurchaseResult {}
