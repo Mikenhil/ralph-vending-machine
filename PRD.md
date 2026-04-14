@@ -8,7 +8,7 @@
 - [x] Create PurchaseResult sealed interface with Success, InsufficientFunds, and OutOfStock record variants
 - [x] Create MenuOption enum with number and description fields and fromNumber() static lookup
 - [x] Create VendingMachine class with balance management (insertMoney, getBalance, collectChange)
-- [] Add inventory loading and getSlots() with defensive copy to VendingMachine
+- [x] Add inventory loading and getSlots() with defensive copy to VendingMachine
 - [] Add purchase() method to VendingMachine returning PurchaseResult with stock and balance checks
 - [] Create Application class with main(), Scanner setup, welcome banner, and main menu loop
 - [] Add viewProducts handler with formatted table showing product number, name, price, and stock status
