@@ -134,7 +134,12 @@ public class Application {
     }
 
     private void handleGetChange() {
-        // TODO: implement in next task
+        int change = machine.collectChange();
+        if (change > 0) {
+            System.out.printf("Returning $%.2f. Have a great day!%n", change / 100.0);
+        } else {
+            System.out.println("No change to return.");
+        }
     }
 
     private void handleExit() {

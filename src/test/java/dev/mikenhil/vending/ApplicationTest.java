@@ -185,4 +185,25 @@ class ApplicationTest {
         String output = runWith(insertAndBuy);
         assertTrue(output.contains("out of stock"), "Expected out of stock message");
     }
+
+    @Test
+    void getChangeReturnsBalance() {
+        // Insert $2.00, get change back
+        String output = runWith("2\n200\n5\n6\n");
+        assertTrue(output.contains("$2.00"), "Expected returned change amount of $2.00");
+    }
+
+    @Test
+    void getChangeResetsBalance() {
+        // Insert $1.00, get change, then check balance is $0.00
+        String output = runWith("2\n100\n5\n3\n6\n");
+        // The check balance after getChange should show $0.00
+        assertTrue(output.contains("$0.00"), "Expected balance to be $0.00 after collecting change");
+    }
+
+    @Test
+    void getChangeWithNoBalanceShowsMessage() {
+        String output = runWith("5\n6\n");
+        assertTrue(output.contains("No change to return"), "Expected no-change message when balance is zero");
+    }
 }
