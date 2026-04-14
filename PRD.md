@@ -15,4 +15,4 @@
 - [x] Add insertMoney and checkBalance handlers with input validation
 - [x] Add purchase handler with pattern matching switch on PurchaseResult sealed interface
 - [x] Add getChange handler and exit flow with Scanner cleanup
-- [] Verify full application flow end-to-end (compile, run, test all menu options and edge cases)
+- [x] Verify full application flow end-to-end (compile, run, test all menu options and edge cases)
