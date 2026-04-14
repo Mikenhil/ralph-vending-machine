@@ -5,7 +5,7 @@
 ## Tasks
 - [x] Create Product enum with displayName and price fields (Cola, Diet Cola, Water, Orange Juice, Chips, Candy Bar, Gum)
 - [x] Create Slot class with Product reference, quantity tracking, isInStock() and decrementQuantity() methods
-- [] Create PurchaseResult sealed interface with Success, InsufficientFunds, and OutOfStock record variants
+- [x] Create PurchaseResult sealed interface with Success, InsufficientFunds, and OutOfStock record variants
 - [] Create MenuOption enum with number and description fields and fromNumber() static lookup
 - [] Create VendingMachine class with balance management (insertMoney, getBalance, collectChange)
 - [] Add inventory loading and getSlots() with defensive copy to VendingMachine
