@@ -10,9 +10,9 @@
 - [x] Create VendingMachine class with balance management (insertMoney, getBalance, collectChange)
 - [x] Add inventory loading and getSlots() with defensive copy to VendingMachine
 - [x] Add purchase() method to VendingMachine returning PurchaseResult with stock and balance checks
-- [] Create Application class with main(), Scanner setup, welcome banner, and main menu loop
-- [] Add viewProducts handler with formatted table showing product number, name, price, and stock status
-- [] Add insertMoney and checkBalance handlers with input validation
-- [] Add purchase handler with pattern matching switch on PurchaseResult sealed interface
+- [x] Create Application class with main(), Scanner setup, welcome banner, and main menu loop
+- [x] Add viewProducts handler with formatted table showing product number, name, price, and stock status
+- [x] Add insertMoney and checkBalance handlers with input validation
+- [x] Add purchase handler with pattern matching switch on PurchaseResult sealed interface
 - [] Add getChange handler and exit flow with Scanner cleanup
 - [] Verify full application flow end-to-end (compile, run, test all menu options and edge cases)
