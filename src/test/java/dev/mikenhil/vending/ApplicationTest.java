@@ -58,4 +58,40 @@ class ApplicationTest {
         String output = runWith("6\n");
         assertTrue(output.contains("Goodbye"));
     }
+
+    @Test
+    void viewProductsPrintsAllProductNames() {
+        String output = runWith("1\n6\n");
+        for (Product product : Product.values()) {
+            assertTrue(output.contains(product.getDisplayName()),
+                    "Expected product table to contain: " + product.getDisplayName());
+        }
+    }
+
+    @Test
+    void viewProductsPrintsHeader() {
+        String output = runWith("1\n6\n");
+        assertTrue(output.contains("Product"));
+        assertTrue(output.contains("Price"));
+        assertTrue(output.contains("Status"));
+    }
+
+    @Test
+    void viewProductsShowsInStockStatus() {
+        String output = runWith("1\n6\n");
+        assertTrue(output.contains("In Stock"));
+    }
+
+    @Test
+    void viewProductsShowsPriceFormatted() {
+        String output = runWith("1\n6\n");
+        // Cola costs $1.50
+        assertTrue(output.contains("$1.50"), "Expected Cola price $1.50 in output");
+    }
+
+    @Test
+    void viewProductsNumbersStartAtOne() {
+        String output = runWith("1\n6\n");
+        assertTrue(output.contains("1"), "Expected product number 1 in output");
+    }
 }

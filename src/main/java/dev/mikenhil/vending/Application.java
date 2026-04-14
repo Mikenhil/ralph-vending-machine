@@ -67,7 +67,18 @@ public class Application {
     }
 
     private void handleViewProducts() {
-        // TODO: implement in next task
+        System.out.println();
+        System.out.printf("  %-4s %-14s %-8s %s%n", "#", "Product", "Price", "Status");
+        System.out.println("  " + "-".repeat(38));
+        for (Slot slot : machine.getSlots()) {
+            Product product = slot.getProduct();
+            String status = slot.isInStock() ? "In Stock" : "Out of Stock";
+            System.out.printf("  %-4d %-14s $%-7.2f %s%n",
+                    product.ordinal() + 1,
+                    product.getDisplayName(),
+                    product.getPrice() / 100.0,
+                    status);
+        }
     }
 
     private void handleInsertMoney() {
