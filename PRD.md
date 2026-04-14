@@ -3,7 +3,7 @@
 ## Vending Machine Console Application - Java 25
 
 ## Tasks
-- [] Create Product enum with displayName and price fields (Cola, Diet Cola, Water, Orange Juice, Chips, Candy Bar, Gum)
+- [x] Create Product enum with displayName and price fields (Cola, Diet Cola, Water, Orange Juice, Chips, Candy Bar, Gum)
 - [] Create Slot class with Product reference, quantity tracking, isInStock() and decrementQuantity() methods
 - [] Create PurchaseResult sealed interface with Success, InsufficientFunds, and OutOfStock record variants
 - [] Create MenuOption enum with number and description fields and fromNumber() static lookup

@@ -1,0 +1,1 @@
+2026-04-14: Created Product enum (dev.mikenhil.vending.Product) with displayName and price fields for all 7 products (Cola, Diet Cola, Water, Orange Juice, Chips, Candy Bar, Gum). Added JUnit 5 dependency to pom.xml, generated Maven wrapper (mvnw), and wrote ProductTest with 5 passing tests.
