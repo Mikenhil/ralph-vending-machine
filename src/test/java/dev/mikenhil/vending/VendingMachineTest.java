@@ -94,4 +94,71 @@ class VendingMachineTest {
         slots.clear();
         assertEquals(Product.values().length, machine.getSlots().size());
     }
+
+    @Test
+    void purchaseSucceedsWhenBalanceSufficient() {
+        machine.insertMoney(200);
+        PurchaseResult result = machine.purchase(Product.COLA);
+        assertInstanceOf(PurchaseResult.Success.class, result);
+        PurchaseResult.Success success = (PurchaseResult.Success) result;
+        assertEquals(Product.COLA, success.product());
+        assertEquals(50, success.change());
+    }
+
+    @Test
+    void purchaseDeductsProductPriceFromBalance() {
+        machine.insertMoney(200);
+        machine.purchase(Product.COLA);
+        assertEquals(50, machine.getBalance());
+    }
+
+    @Test
+    void purchaseDecrementsSlotQuantity() {
+        machine.insertMoney(200);
+        machine.purchase(Product.COLA);
+        Slot colaSlot = machine.getSlots().stream()
+                .filter(s -> s.getProduct() == Product.COLA)
+                .findFirst().orElseThrow();
+        assertEquals(4, colaSlot.getQuantity());
+    }
+
+    @Test
+    void purchaseReturnsInsufficientFundsWhenBalanceLow() {
+        machine.insertMoney(50);
+        PurchaseResult result = machine.purchase(Product.COLA);
+        assertInstanceOf(PurchaseResult.InsufficientFunds.class, result);
+        PurchaseResult.InsufficientFunds insufficient = (PurchaseResult.InsufficientFunds) result;
+        assertEquals(Product.COLA.getPrice(), insufficient.price());
+        assertEquals(50, insufficient.balance());
+    }
+
+    @Test
+    void purchaseReturnsOutOfStockWhenSlotEmpty() {
+        machine.insertMoney(1000);
+        for (int i = 0; i < 5; i++) {
+            machine.purchase(Product.GUM);
+        }
+        PurchaseResult result = machine.purchase(Product.GUM);
+        assertInstanceOf(PurchaseResult.OutOfStock.class, result);
+        PurchaseResult.OutOfStock outOfStock = (PurchaseResult.OutOfStock) result;
+        assertEquals(Product.GUM, outOfStock.product());
+    }
+
+    @Test
+    void purchaseDoesNotAlterBalanceWhenInsufficientFunds() {
+        machine.insertMoney(50);
+        machine.purchase(Product.COLA);
+        assertEquals(50, machine.getBalance());
+    }
+
+    @Test
+    void purchaseDoesNotAlterBalanceWhenOutOfStock() {
+        machine.insertMoney(1000);
+        for (int i = 0; i < 5; i++) {
+            machine.purchase(Product.GUM);
+        }
+        int balanceBefore = machine.getBalance();
+        machine.purchase(Product.GUM);
+        assertEquals(balanceBefore, machine.getBalance());
+    }
 }

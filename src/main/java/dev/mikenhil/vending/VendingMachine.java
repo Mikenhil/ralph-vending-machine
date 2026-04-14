@@ -37,4 +37,22 @@ public class VendingMachine {
         balance = 0;
         return change;
     }
+
+    public PurchaseResult purchase(Product product) {
+        Slot slot = slots.stream()
+                .filter(s -> s.getProduct() == product)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown product: " + product));
+
+        if (!slot.isInStock()) {
+            return new PurchaseResult.OutOfStock(product);
+        }
+        if (balance < product.getPrice()) {
+            return new PurchaseResult.InsufficientFunds(product.getPrice(), balance);
+        }
+
+        slot.decrementQuantity();
+        balance -= product.getPrice();
+        return new PurchaseResult.Success(product, balance);
+    }
 }
