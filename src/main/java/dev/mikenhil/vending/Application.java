@@ -105,7 +105,32 @@ public class Application {
     }
 
     private void handlePurchase() {
-        // TODO: implement in next task
+        Product[] products = Product.values();
+        System.out.printf("Enter product number (1-%d): ", products.length);
+        String input = scanner.nextLine().trim();
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a product number.");
+            return;
+        }
+        if (number < 1 || number > products.length) {
+            System.out.printf("Invalid product number. Please choose between 1 and %d.%n", products.length);
+            return;
+        }
+        Product product = products[number - 1];
+        PurchaseResult result = machine.purchase(product);
+        switch (result) {
+            case PurchaseResult.Success s ->
+                System.out.printf("Dispensing %s. Remaining balance: $%.2f%n",
+                        s.product().getDisplayName(), s.change() / 100.0);
+            case PurchaseResult.InsufficientFunds f ->
+                System.out.printf("Insufficient funds. Price: $%.2f, Balance: $%.2f%n",
+                        f.price() / 100.0, f.balance() / 100.0);
+            case PurchaseResult.OutOfStock o ->
+                System.out.printf("%s is out of stock.%n", o.product().getDisplayName());
+        }
     }
 
     private void handleGetChange() {

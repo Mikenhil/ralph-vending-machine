@@ -137,4 +137,52 @@ class ApplicationTest {
         String output = runWith("2\n200\n3\n6\n");
         assertTrue(output.contains("$2.00"), "Expected balance of $2.00 after inserting 200 cents");
     }
+
+    @Test
+    void purchaseSuccessDispensesProduct() {
+        // Insert $2.00, purchase product 1 (Cola, $1.50)
+        String output = runWith("2\n200\n4\n1\n6\n");
+        assertTrue(output.contains("Dispensing Cola"), "Expected dispensing message for Cola");
+    }
+
+    @Test
+    void purchaseSuccessShowsRemainingBalance() {
+        // Insert $2.00 (200 cents), Cola costs $1.50 (150 cents), remaining = $0.50
+        String output = runWith("2\n200\n4\n1\n6\n");
+        assertTrue(output.contains("$0.50"), "Expected remaining balance of $0.50");
+    }
+
+    @Test
+    void purchaseInsufficientFundsShowsError() {
+        // No money inserted, try to purchase Cola ($1.50)
+        String output = runWith("4\n1\n6\n");
+        assertTrue(output.contains("Insufficient funds"), "Expected insufficient funds message");
+    }
+
+    @Test
+    void purchaseInsufficientFundsShowsPriceAndBalance() {
+        String output = runWith("4\n1\n6\n");
+        assertTrue(output.contains("$1.50"), "Expected price in insufficient funds message");
+        assertTrue(output.contains("$0.00"), "Expected balance in insufficient funds message");
+    }
+
+    @Test
+    void purchaseInvalidNonNumericShowsError() {
+        String output = runWith("4\nabc\n6\n");
+        assertTrue(output.contains("Invalid input"), "Expected invalid input message");
+    }
+
+    @Test
+    void purchaseInvalidProductNumberShowsError() {
+        String output = runWith("4\n99\n6\n");
+        assertTrue(output.contains("Invalid product number"), "Expected invalid product number message");
+    }
+
+    @Test
+    void purchaseOutOfStockShowsMessage() {
+        // Buy all 5 Cola (product 1) then try again
+        String insertAndBuy = "2\n200\n4\n1\n".repeat(5) + "4\n1\n6\n";
+        String output = runWith(insertAndBuy);
+        assertTrue(output.contains("out of stock"), "Expected out of stock message");
+    }
 }
