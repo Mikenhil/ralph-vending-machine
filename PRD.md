@@ -2,6 +2,11 @@
 
 ## Vending Machine Console Application - Java 25
 
+## Working Instructions
+- Work in package: src/main/java/dev/mikenhil/vending/ollama
+- Do not modify or reference any files in package: src/main/java/dev/mikenhil/vending/claude
+- Java code files should use the .java extension and not .kt
+
 ## Tasks
 - [x] Create Product enum with displayName and price fields (Cola, Diet Cola, Water, Orange Juice, Chips, Candy Bar, Gum)
 - [x] Create Slot class with Product reference, quantity tracking, isInStock() and decrementQuantity() methods
